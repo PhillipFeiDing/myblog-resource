@@ -44,6 +44,7 @@ const $content = $('#content')
 // 获取数据
 const urlParams = getUrlParams()
 const url = '/api/blog/detail?id=' + urlParams.id
+const $menuContainer = $('#menu')
 
 get(url).then(res => {
     if (res.errno !== 0) {
@@ -62,42 +63,18 @@ get(url).then(res => {
         &nbsp; &nbsp; &nbsp; &nbsp;
         <span>${getFormatDate(data.createtime)}</span>
     `))
-})
-
-// 返回按钮
-function goTop(min_height) {
-    $(".Totop").click(
-        function() {
-            $('html,body').animate({
-                scrollTop: 0
-            }, 700);
-        });
-    //获取页面的最小高度，无传入值则默认为600像素
-    min_height=min_height?min_height:400;
-    //为窗口的scroll事件绑定处理函数
-    $(window).scroll(function() {
-        //获取窗口的滚动条的垂直位置
-        var s = $(window).scrollTop();
-        //当窗口的滚动条的垂直位置大于页面的最小高度时，让返回顶部元素渐现，否则渐隐
-        if (s > min_height) {
-            $(".Totop").fadeIn(100);
-        } else {
-            $(".Totop").fadeOut(200);
+}).then(() => {
+    const url = '/api/menu/menulist'
+    get(url).then((res) => {
+        if (res.errno !== 0) {
+            alert('数据错误')
+            return
         }
-    });
-}
-$(function() {
-    goTop();
-});
-
-// 微信扫码
-$('#icon_Wechat').mouseenter(() => {
-    $('#Wechat_Qr').css('transform', 'translateY(0px)')
-    $('#Wechat_Qr').css('z-index', '99')
-    $('#Wechat_Qr').css('opacity', '1')
-})
-$('#icon_Wechat').mouseleave(() => {
-    $('#Wechat_Qr').css('transform', 'translateY(-20px)')
-    $('#Wechat_Qr').css('z-index', '-1')
-    $('#Wechat_Qr').css('opacity', '0')
+        const data = res.data || []
+        data.forEach(item => {
+            $menuContainer.append($(`
+                <li><a href="${item.link}"><span style="opacity: 1; transform: translateX(-10px);">${item.itemname}</span></a></li>
+            `))
+        })
+    })
 })
