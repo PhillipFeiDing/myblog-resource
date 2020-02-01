@@ -32,6 +32,19 @@
             margin: 0 auto;
             height: 150px;
         }
+        .image-wrapper {
+            margin: 20px auto;
+            width: 75%;
+        }
+        .image-wrapper input {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 24px;
+        }
+        .prompt-wrapper {
+            margin: 20px auto;
+            width: 75%;
+        }
         #editor {
             width: 75%;
             margin: 20px auto;
@@ -69,16 +82,25 @@
 <body>
     <h1 style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">编辑博客</h1>
     <div>
+        <p class="prompt-wrapper">标题: </p>
         <div class="title-wrapper">
             <input id="text-title">
         </div>
+        <p class="prompt-wrapper">摘要: </p>
         <div class="exerpt-wrapper">
             <textarea id="text-exerpt"></textarea>
         </div>
+        <p class="prompt-wrapper">图片 URL: </pclass="prompt-wrapper">
+        <div class="image-wrapper">
+            <input id="text-image">
+        </div>
+        <p class="prompt-wrapper">正文: </p>
         <div id='editor'>
         </div>
+        <p class="prompt-wrapper">标签: </p>
         <div class="tag-button-wrapper">
         </div>
+        <p class="prompt-wrapper">时间: </p>
         <div class="datetime-wrapper">
             <input id="time-input" type="datetime-local" value=""/>
         </div>
@@ -148,6 +170,7 @@
         const $textTitle = $('#text-title')
         const $btnUpdate = $('#btn-update')
         const $textExerpt = $('#text-exerpt')
+        const $textImage = $('#text-image')
         const $tagSelect = $('.tag-button-wrapper')
         const $timeInput = $('#time-input')
 
@@ -181,6 +204,7 @@
             const data = res.data || {}
             $textTitle.val(data.title)
             $textExerpt.val(data.exerpt)
+            $textImage.val(data.imageurl)
             editor.txt.html(data.content)
             const createtime = data.createtime
 
@@ -205,6 +229,7 @@
             const title = $textTitle.val()
             const content = editor.txt.html()
             const exerpt = $textExerpt.val()
+            const imageUrl = $textImage.val()
 
             // 生成tags列表
             let tags = []
@@ -224,6 +249,7 @@
                 title,
                 content,
                 exerpt,
+                imageUrl,
                 tags,
                 createtime
             }

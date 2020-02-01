@@ -148,7 +148,7 @@ get(tagListUrl).then((res) => {
                 </ul>
             `
             $container.append($(`
-                <li>
+                <li class="blog-exerpt-container" blog-id="${item.id}">
                     <p class="date">
                         ${getFormatDate(item.createtime)}
                     </p>
@@ -158,13 +158,38 @@ get(tagListUrl).then((res) => {
                         </a>
                     </h4>
                     <div class="excerpt">
-                        <p class="issue">
+                        <p id="blog-p-${item.id}" class="issue" style="float: left;">
                             ${item.exerpt}
                         </p>
+                        <did id="blog-div-${item.id}" class="blog-image-container"style="float: left; width: 0px;">
+                            <img id="blog-image-${item.id}" src="${item.imageurl}" style="padding-left: 10px; height: 0; width: 0;">
+                        </div>
+                        <div style="clear: both"></div>
                     </div>
                     ${tagListHtml}
                 </li>
             `))
+        })
+        $('.blog-exerpt-container').on('mouseenter', function() {
+            const thisId = $(this).attr('blog-id')
+            $(this).css('background', '#eaeeef')
+            const srcurl = $('#blog-image-' + thisId).attr('src')
+            if (srcurl != '') {
+                $('#blog-p-' + thisId).css('width', '70%')
+                const height = $('#blog-p-' + thisId).css('height')
+                $('#blog-image-' + thisId).css('display', '')
+                $('#blog-image-' + thisId).css('height', height)
+                $('#blog-image-' + thisId).css('width', '100%')
+                $('#blog-div-' + thisId).css('width', '30%')
+            }
+        })
+        $('.blog-exerpt-container').on('mouseleave', function() {
+            const thisId = $(this).attr('blog-id')
+            $(this).css('background', '')
+            $('#blog-p-' + thisId).css('width', '')
+            $('#blog-image-' + thisId).css('height', 0)
+            $('#blog-image-' + thisId).css('width', 0)
+            $('#blog-image-' + thisId).css('display', 'none')
         })
         return resultsFound
     }).then(resultsFound => {

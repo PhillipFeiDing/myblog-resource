@@ -5,7 +5,7 @@ const perPage = 10
 const getList = (author, keyword, tagId, page) => {
     author = escape(author)
     keyword = escape(keyword)
-    let sql = `select id, title, exerpt, author, createtime, tags from blogs where 1=1 `
+    let sql = `select id, title, exerpt, imageurl, author, createtime, tags from blogs where 1=1 `
     if (author) {
         sql += `and author='${author}' `
     }
@@ -93,11 +93,12 @@ const updateBlog = (id, blogData = {}) => {
     const title = escape(blogData.title)
     const content = escape(blogData.content)
     const exerpt = escape(blogData.exerpt)
+    const imageurl = escape(blogData.imageUrl)
     const tags = escape(JSON.stringify(blogData.tags))
     const createtime = blogData.createtime
 
     const sql = `
-        update blogs set title='${title}', content='${content}', exerpt='${exerpt}', tags='${tags}', createtime='${createtime}' where id=${id};
+        update blogs set title='${title}', content='${content}', exerpt='${exerpt}', imageurl='${imageurl}', tags='${tags}', createtime='${createtime}' where id=${id};
     `
 
     return exec(sql).then(updateData => {
