@@ -34,7 +34,7 @@
         <p class="name">Hi, <text id="changerificwordspanid"></text>!</p>
         <div id='tag-display-container' style='position: relative; bottom: 20%;'></div>
       </div>
-      <div class="container">
+      <div class="container" id="dotline-target" style="position: relative;">
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1">
           <ul id="issue-list" class="main_content" style="padding-left: 0px; opacity: 1; transform: translateY(0px);">
             <br>
@@ -54,6 +54,7 @@
           <div class="tags" style="margin-top:10px" id="tags-cn">
           </div>
         </div>
+        <canvas id="J_dotLine" style="background-color: #ffffff; position: absolute; left: 0; z-index: -2;"></canvas>
       </div>
       <div style="text-align: center">
         <ul class="pagination" id="pages" style="display: inline-block;">
@@ -79,10 +80,11 @@
   <script src = "js/jquery.min.js"></script>
   <script src = "js/typed.js"></script>
   <!--<script src = "js/gitblog.js"></script>-->
-  <script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
-  <script src="https://cdn.bootcss.com/moment.js/2.23.0/locale/zh-cn.js"></script>
+  <script src="js/moment.min.js"></script>
+  <script src="js/zh-cn.js"></script>
   <script src="js/index_data.js"></script>
   <script src="js/common.js"></script>
+  <script src="js/dotline.js"></script>
   <script>
       $(function(){ 
       　$('.head').css("opacity","1");

@@ -172,7 +172,7 @@ get(tagListUrl).then((res) => {
         })
         $('.blog-exerpt-container').on('mouseenter', function() {
             const thisId = $(this).attr('blog-id')
-            $(this).css('background', '#eaeeef')
+            $(this).css('background', '#ecf0f1')
             const srcurl = $('#blog-image-' + thisId).attr('src')
             if (srcurl != '') {
                 $('#blog-p-' + thisId).css('width', '70%')
@@ -191,6 +191,7 @@ get(tagListUrl).then((res) => {
             $('#blog-image-' + thisId).css('width', 0)
             $('#blog-image-' + thisId).css('display', 'none')
         })
+        render_dot_lines()
         return resultsFound
     }).then(resultsFound => {
         let resultEng = ''
