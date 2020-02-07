@@ -1,0 +1,2 @@
+# Introduction
+This repository works in parallel with myblog. It provides necessary static resources for the main site. Yes, I am using GitHub as a resource host! And I would like to seperate code logic from data. :)
